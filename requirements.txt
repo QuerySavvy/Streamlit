@@ -18,7 +18,6 @@ missingno==0.5.2
 mkl-service==2.4.0
 multimethod==1.10
 munkres==1.1.4
-pandas-profiling==3.2.0
 patsy==0.5.3
 ply==3.11
 protobuf==4.24.3
