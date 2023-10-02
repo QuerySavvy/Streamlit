@@ -1,4 +1,6 @@
-streamlit
 pandas
-ydata_profiling
-streamlit_pandas_profiling
+numpy
+time
+streamlit
+datetime
+matplotlib
