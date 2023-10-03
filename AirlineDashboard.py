@@ -33,8 +33,8 @@ if location == 'Select a file':
         if file is None:
             st.write("No input file selected. Waiting for a file to be uploaded...")
             st.stop()
-
-st.balloons()
+if location == 'Select a file':
+    st.balloons()
              
 # read the file and convert ot a pandas DataFrame
 data = pd.read_csv(file)
