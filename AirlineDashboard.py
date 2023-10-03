@@ -33,14 +33,7 @@ if location == 'Select a file':
             st.write("No input file selected. Waiting for a file to be uploaded...")
             st.stop()
 
-#if uploaded_file is not None:
-#  df = pd.read_csv(uploaded_file)
-#  st.subheader('DataFrame')
-#  st.write(df)
-#  st.subheader('Descriptive Statistics')
-#  st.write(df.describe())
-#else:
-#  st.info('☝️ Upload a CSV file')
+st.balloons()
              
 # read the file and convert ot a pandas DataFrame
 data = pd.read_csv(file)
