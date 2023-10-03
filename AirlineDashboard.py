@@ -17,7 +17,7 @@ from datetime import datetime as dt
 from matplotlib import pyplot as plt
 
 #change location depeding on where i am whilst working on the project
-location = st.selectbox('Choose file location','Git','Select a file'])
+location = st.selectbox('Choose file location',['Git','Select a file'])
 file = None
 
 
