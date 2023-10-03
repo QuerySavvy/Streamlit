@@ -29,7 +29,6 @@ if location == 'Git':
 if location == 'Select a file':
     if location not in ('Work (Local fle)', 'Git'):
         file = st.file_uploader("Choose a file")
-        st.balloons()
         if file is None:
             st.write("No input file selected. Waiting for a file to be uploaded...")
             st.stop()
