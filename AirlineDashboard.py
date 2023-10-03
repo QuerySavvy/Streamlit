@@ -22,8 +22,8 @@ file = None
 
 
 # define the file to be imported and replace the backslash with forwardslash
-if location == 'Work (Local fle)':
-    file = (r"C:\Users\PCHAPMAN\Documents\Paul - My Documents\Python\Airline Dataset Updated - v2.csv")
+#if location == 'Work (Local fle)':
+#    file = (r"C:\Users\PCHAPMAN\Documents\Paul - My Documents\Python\Airline Dataset Updated - v2.csv")
 if location == 'Git':
     file = (r"https://raw.githubusercontent.com/QuerySavvy/TrainingFiles/main/Airline%20Dataset%20Updated%20-%20v2.csv")
 if location == 'Select a file':
