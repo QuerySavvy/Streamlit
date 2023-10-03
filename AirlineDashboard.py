@@ -49,7 +49,7 @@ print(type(df))
 print("Columns before adjusting dataset:\n",df.columns)
 
 # Reformatting the date column
-df['Departure Date'] = pd.to_datetime(df['Departure Date'])
+df['Departure Date'] = pd.to_datetime(df['Departure Date'],format='mixed)
 
 # Reducing the dataset 
 df = df[['Passenger ID', 'Gender', 'Age', 'Nationality', 'Airport Name',
