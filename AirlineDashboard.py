@@ -22,7 +22,7 @@ def read_csv_into_dataframe():
     return df
 
 # Reformatting the date column
-df['Departure Date'] = pd.to_datetime(df['Departure Date'], format = 'mixed')
+df['Departure Date'] = pd.to_datetime(df['Departure Date'])
 
 # Reducing the dataset 
 df = df[['Passenger ID', 'Gender', 'Age', 'Nationality', 'Airport Name',
