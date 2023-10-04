@@ -14,11 +14,12 @@ from datetime import datetime as dt
 from matplotlib import pyplot as plt
 
 # read the file and convert ot a pandas DataFrame
-file = (r"https://raw.githubusercontent.com/QuerySavvy/TrainingFiles/main/Airline%20Dataset%20Updated%20-%20v2.csv")
-data = pd.read_csv(file)
-df = pd.DataFrame(data)
-print(type(df))
-print("Columns before adjusting dataset:\n",df.columns)
+@st.cache_data()
+def read_csv_into_dataframe():
+    file_url = "https://raw.githubusercontent.com/QuerySavvy/TrainingFiles/main/Airline%20Dataset%20Updated%20-%20v2.csv"
+    data = pd.read_csv(file_url)
+    df = pd.DataFrame(data)
+    return df
 
 # Reformatting the date column
 df['Departure Date'] = pd.to_datetime(df['Departure Date'], format = 'mixed')
