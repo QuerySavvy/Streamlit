@@ -78,7 +78,7 @@ df = df[(df['Age'] >= MinAgeSelected) & (df['Age'] <= MaxAgeSelected)]
 df = df[(df['Departure Date'] >= MinDateSelected) & (df['Departure Date'] <= MaxDateSelected)]
 
 #-------------------------------------------------------------- Group and slice the data for analysis
-flights_by_sex = df.groupby("Gender").size(normalize=True).reset_index(name='Count')
+flights_by_sex = df.groupby("Gender").size().reset_index(name='Count')
 
 flights_by_nationality = df['Nationality'].value_counts().head(10)
 flights_by_nationality = flights_by_nationality.sort_values()
@@ -95,7 +95,7 @@ flights_over_time = df.groupby(
 
 #Flight Status Analysis:
 #Question 1
-flightstatus = df.groupby('Flight Status').size().reset_index(name='count').sort_values(by='count', ascending=False)
+flightstatus = df.groupby('Flight Status').size(normalize = True).reset_index(name='count').sort_values(by='count', ascending=False)
 flightstatus.plot(kind = 'barh',x='Flight Status',y='count')
 
 
