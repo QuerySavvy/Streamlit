@@ -24,8 +24,6 @@ file = None
 
 
 # define the file to be imported and replace the backslash with forwardslash
-if location == 'Work (Local fle)':
-    file = (r"C:\Users\PCHAPMAN\Documents\Paul - My Documents\Python\Airline Dataset Updated - v2.csv")
 if location == 'Git':
     file = (r"https://raw.githubusercontent.com/QuerySavvy/TrainingFiles/main/Airline%20Dataset%20Updated%20-%20v2.csv")
 if location == 'Select a file':
@@ -59,12 +57,9 @@ lookup = df[['Departure Airport', 'Country Name', 'Continent']].drop_duplicates(
 
 
 
-
-
 #-------------------------------Sreamlit Sidebar and Filters
 
 st.sidebar.title('Settings and Filters')
-
 
 minage = df['Age'].min()
 maxage = df['Age'].max()
@@ -76,11 +71,9 @@ Maxdate = df['Departure Date'].max()
 Mindate = dt.date(Mindate)
 Maxdate = dt.date(Maxdate)
 
-
 date = st.sidebar.slider(
     'Select a date range',
     value = (Mindate, Maxdate))
-
 
 age = st.sidebar.slider(
     'Select an age range',
@@ -110,34 +103,17 @@ df = df[(df['Departure Date'] >= MinDateSelected) & (df['Departure Date'] <= Max
 #Passenger Demographics:
 #Question 1
 
-df['Age'].hist(bins = 15)
-plt.suptitle('Distribution of age:', size = 14)
-plt.title('This ficticious dataset does not follow the normal distribution',size = 10)
-plt.show()
 
 #Passenger Demographics:
 #Question 2
 
 flights_by_sex = df.groupby("Gender").size().reset_index(name='Count')
-flights_by_sex.plot(kind = 'bar')
-plt.title('Gender split, male vs female')
-plt.xlabel('Gender')
-plt.ylabel('Count')
-plt.show()
-
 
 #Passenger Demographics:
 # Question 3
 
 flights_by_nationality = df['Nationality'].value_counts().head(10)
 flights_by_nationality = flights_by_nationality.sort_values()
-
-flights_by_nationality.plot(kind = 'barh')
-plt.title('Which nationality flies the most?')
-plt.xlabel('Count')
-plt.ylabel('Nationality')
-#plt.show()
-
 
 #Flight Routes and Airports:
 #Question 1
