@@ -5,7 +5,6 @@
 
 # **Objective:** Create an interactive web dashboard using Streamlit to explore and analyze the provided airline dataset, allowing users to gain insights into passenger demographics, flight routes, and flight statuses.
 
-
 # import all the packages
 import pandas as pd
 import numpy as np
@@ -14,27 +13,8 @@ import streamlit as st
 from datetime import datetime as dt
 from matplotlib import pyplot as plt
 
-#change location depeding on where i am whilst working on the project
-
-#location = st.selectbox('Choose file location',['Work (Local fle)','Git','Select a file'])
-
-location = 'Git'
-
-file = None
-
-
-# define the file to be imported and replace the backslash with forwardslash
-if location == 'Git':
-    file = (r"https://raw.githubusercontent.com/QuerySavvy/TrainingFiles/main/Airline%20Dataset%20Updated%20-%20v2.csv")
-if location == 'Select a file':
-    if location not in ('Work (Local fle)', 'Git'):
-        file = st.file_uploader("Choose a file")
-        if file is None:
-            st.info('☝️ Upload a file')
-            st.stop()
-
-             
 # read the file and convert ot a pandas DataFrame
+file = (r"https://raw.githubusercontent.com/QuerySavvy/TrainingFiles/main/Airline%20Dataset%20Updated%20-%20v2.csv")
 data = pd.read_csv(file)
 df = pd.DataFrame(data)
 print(type(df))
@@ -57,7 +37,7 @@ lookup = df[['Departure Airport', 'Country Name', 'Continent']].drop_duplicates(
 
 
 
-#-------------------------------Sreamlit Sidebar and Filters
+#--------------------------------------------------------------Sreamlit Sidebar and Filters
 
 st.sidebar.title('Settings and Filters')
 
@@ -79,7 +59,6 @@ age = st.sidebar.slider(
     'Select an age range',
     int(minage),int(maxage),(int(age25),int(age75)))
 
-
 MinAgeSelected = age[0]
 MaxAgeSelected = age[1]
 
@@ -90,7 +69,6 @@ flights_by_nationality = df['Nationality'].value_counts().head(10)
 flights_by_nationality = flights_by_nationality.sort_values()
 countries = flights_by_nationality.index.tolist()
 
-
 if st.sidebar.toggle('Filter by top 10 nationalities'):
     NationalitySelected = st.sidebar.selectbox('Selection a nationality',countries)
     df = df[(df['Nationality'] == NationalitySelected)]
@@ -99,54 +77,21 @@ if st.sidebar.toggle('Filter by top 10 nationalities'):
 df = df[(df['Age'] >= MinAgeSelected) & (df['Age'] <= MaxAgeSelected)]
 df = df[(df['Departure Date'] >= MinDateSelected) & (df['Departure Date'] <= MaxDateSelected)]
 
-
-#Passenger Demographics:
-#Question 1
-
-
-#Passenger Demographics:
-#Question 2
-
+#-------------------------------------------------------------- Group and slice the data for analysis
 flights_by_sex = df.groupby("Gender").size().reset_index(name='Count')
-
-#Passenger Demographics:
-# Question 3
 
 flights_by_nationality = df['Nationality'].value_counts().head(10)
 flights_by_nationality = flights_by_nationality.sort_values()
 
-#Flight Routes and Airports:
-#Question 1
 flights_by_airport = df.groupby(
     ['Departure Airport']).size().reset_index(name='Count').sort_values(by='Count', ascending=False)
-
 airportjoin = flights_by_airport.merge(lookup, on='Departure Airport')
 airportjoin = airportjoin.set_index('Departure Airport').head(10)
-print("The top 10 airports are:\n\n",airportjoin)
-
 
 #Flight Routes and Airports:
 #Question 2 and Question 3
-#All flights
-flight_counts = df.groupby(
-    ['Continent', 'Departure Date']).size().reset_index(name='count').sort_values(by='count', ascending=True)
-print("All Flights\n",flight_counts.head())
-
-print("----------------------------------------------------------------------------------")
-
-#All flights
 flights_over_time = df.groupby(
     'Departure Date').size().reset_index(name='count').sort_values(by='count', ascending=False)
-print("\nFlights_over_time\n",flights_over_time.head())
-flights_over_time.plot(kind = "line", x='Departure Date',y='count', title = 'flights over time')
-plt.show()
-
-#Flights grouped by month
-monthlyflights = flights_over_time.groupby(pd.Grouper(key='Departure Date', freq='M')).sum()
-print("\nmonthlyflights\n",monthlyflights.head())
-monthlyflights.plot(kind='line', y='count', title = 'flights grouped by month')
-plt.show()
-
 
 #Flight Status Analysis:
 #Question 1
@@ -156,15 +101,11 @@ flightstatus.plot(kind = 'barh',x='Flight Status',y='count')
 
 #-------------------------------Streamlit setup
 
-
 # fig1 - Histogram of age distribution
 fig1, ax = plt.subplots()
 ax.hist(df['Age'],bins = 15)
 plt.suptitle('Distribution of age:', size = 14)
 plt.title('This ficticious dataset does not follow the normal distribution',size = 10)
-
-# fig2 - Male female split
-
 
 #fig3
 fig3, ax = plt.subplots()
@@ -173,14 +114,11 @@ plt.title('Which nationality flies the most?')
 plt.xlabel('Count')
 plt.ylabel('Nationality')
 
-
-
 #-------------------------------Sreamlit Design Testing
 st.title("Explitory Data Analysis of the Airline Dataset")
 st.write("Objective: Create an interactive web dashboard using Streamlit to explore and analyse the airline dataset, allowing users to gain insights into passenger demographics, flight routes, and flight statuses.")
 
 st.header("Section 1: Customer demographics")
-
 st.subheader("Question 1")
 st.write("What is the distribution of passenger ages?")
 st.pyplot(fig1)
@@ -189,11 +127,9 @@ st.subheader("Question 2")
 st.write("How does the gender distribution of passengers look, and is there any notable variation in travel preferences between genders?")
 st.bar_chart(flights_by_sex, x='Gender', y = 'Count')
 
-
 st.subheader("Question 3")
 st.write("Which nationalities are most commonly represented among passengers, and can we uncover any patterns related to nationality?")
 st.pyplot(fig3)
-
 
 st.header("Section 2: Flight Routes and Airports:")
 st.subheader("Question 1")
