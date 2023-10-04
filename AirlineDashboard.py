@@ -95,7 +95,7 @@ flights_over_time = df.groupby(
 
 #Flight Status Analysis:
 #Question 1
-flightstatus = df.groupby('Flight Status').size(normalize = True).reset_index(name='count').sort_values(by='count', ascending=False)
+flightstatus = df.groupby('Flight Status').size().reset_index(name='count').sort_values(by='count', ascending=False)
 flightstatus.plot(kind = 'barh',x='Flight Status',y='count')
 
 
