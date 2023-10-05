@@ -73,7 +73,7 @@ formatted_output = pd.DataFrame({ 'Data Type': data_types,
 st.table(formatted_output)
 
 # ---------------------------- ---------------------------- Summary statistics
-st.subheader('Summary statistics of numeric column(s)')
+st.subheader('Summary statistics of numeric column(s)':)
 st.write(df.describe())
 
 # ---------------------------- ---------------------------- Data Visualisation - Histogram
