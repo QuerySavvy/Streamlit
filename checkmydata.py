@@ -3,8 +3,6 @@ import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
 
-
-
 # ---------------------------- ---------------------------- Title and intro
 st.title("CheckMyData")
 st.write("Welcome to CheckMyData!!!")
