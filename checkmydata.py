@@ -112,7 +112,6 @@ with col2:
     aggregation = st.selectbox('Select an aggregation method',['Sum','Average','Count'])   
 with col3:
     y_axis = st.selectbox('Select a y axis value',column_list)
-st.write("THIS IS A TEST")
 
 if st.button('Display Bar Chart'):
     if aggregation == 'Sum': 
