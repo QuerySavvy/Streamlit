@@ -1,7 +1,9 @@
 import streamlit as st
 import pandas as pd
-import seaborn as sns
+#import seaborn as sns
 from matplotlib import pyplot as plt
+
+
 
 # ---------------------------- ---------------------------- Title and intro
 st.title("CheckMyData")
@@ -92,7 +94,8 @@ with col2:
 
 # Create a histogram using the column selected paramaters
 fig1 = plt.figure()
-sns.histplot(df[form_histcolumn], kde=True, bins=form_histbins)
+plt.hist(df[form_histcolumn],edgecolor = "black",bins=form_histbins)
+# sns.histplot(df[form_histcolumn], kde=True, bins=form_histbins)
 plt.title(f'Distribution of {form_histcolumn}')
 st.pyplot(fig1)
 
