@@ -104,19 +104,23 @@ st.subheader('Explore relationships between variables:')
 
 st.write('Select input variables for a bar chart:')
 column_list = df.columns.tolist()
+# Create a layout of three columns to choose the columns and aggregation types
 col1, col2, col3 = st.columns(3)
 with col1:
     x_axis = st.selectbox('Select an x axis value',column_list)
 with col2:
-    aggregation = st.selectbox('Select an aggregation method',['Sum','Average'])   
+    aggregation = st.selectbox('Select an aggregation method',['Sum','Average','Count'])   
 with col3:
     y_axis = st.selectbox('Select a y axis value',column_list)
+
 
 if st.button('Display Bar Chart'):
     if aggregation == 'Sum': 
         df_agg = df.groupby(x_axis)[y_axis].sum()
     if aggregation == 'Average': 
         df_agg = df.groupby(x_axis)[y_axis].mean()
+    if aggregation == 'Count': 
+        df_agg = df.groupby(x_axis)[y_axis].count()
     st.bar_chart(df_agg)
 
 
